@@ -1,7 +1,9 @@
 
 #' Create tibbles from user objects and/or user data
 #'
-#' @param data A data.frame/tibble, or NULL
+#' @param .data A data.frame/tibble, or NULL
+#' @param .allow_null Flag to allow NULL values as arguments
+#'   (these will not appear as columns in the output)
 #' @param ... Arguments are passed to \link[dplyr]{transmute} if \code{data} is
 #'   present, and \link[tibble]{tibble} if it is not.
 #'
@@ -9,7 +11,7 @@
 #' @export
 #' @importFrom rlang !!!
 #'
-data_eval <- function(.data = NULL, ..., .allow_null = TRUE) {
+data_eval <- function(.data = NULL, ..., .allow_null = FALSE) {
   args <- rlang::quos(...)
 
   # check NULLs, which tibble doesn't accept and transmute complains about

@@ -4,13 +4,16 @@
 \alias{data_eval}
 \title{Create tibbles from user objects and/or user data}
 \usage{
-data_eval(.data = NULL, ..., .allow_null = TRUE)
+data_eval(.data = NULL, ..., .allow_null = FALSE)
 }
 \arguments{
+\item{.data}{A data.frame/tibble, or NULL}
+
 \item{...}{Arguments are passed to \link[dplyr]{transmute} if \code{data} is
 present, and \link[tibble]{tibble} if it is not.}
 
-\item{data}{A data.frame/tibble, or NULL}
+\item{.allow_null}{Flag to allow NULL values as arguments
+(these will not appear as columns in the output)}
 }
 \value{
 A \link[tibble]{tibble} with the results of ...

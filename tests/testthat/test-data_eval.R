@@ -24,12 +24,13 @@ test_that("data_eval accepts tidy eval input", {
 })
 
 test_that("NULL values result in no columns", {
-  expect_identical(colnames(data_eval(a = 1:5, b = NULL)), "a")
+  expect_identical(colnames(data_eval(a = 1:5, b = NULL, .allow_null = TRUE)), "a")
   expect_identical(
-    colnames(data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = NULL)),
+    colnames(data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = NULL, .allow_null = TRUE)),
     "a"
   )
-  expect_silent(colnames(data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = NULL)))
+  expect_silent(colnames(data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = NULL,
+                                   .allow_null = TRUE)))
 })
 
 test_that("no arguments is no problem", {
@@ -39,11 +40,11 @@ test_that("no arguments is no problem", {
   expect_identical(ncol(data_eval(tibble::tibble(a = 1:5, b = 6:10))), 0L)
   expect_identical(
     data_eval(),
-    data_eval(a = NULL, b = NULL)
+    data_eval(a = NULL, b = NULL, .allow_null = TRUE)
   )
   expect_identical(
     data_eval(tibble::tibble(a = 1:5, b = 6:10)),
-    data_eval(tibble::tibble(a = 1:5, b = 6:10), a = NULL, b = NULL)
+    data_eval(tibble::tibble(a = 1:5, b = 6:10), a = NULL, b = NULL, .allow_null = TRUE)
   )
 })
 
