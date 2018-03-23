@@ -3,7 +3,7 @@ context("test-data_eval.R")
 test_that("data_eval creates tibbles with or without data", {
   expect_is(data_eval(a = 1:5, b = 6:10), "tbl_df")
   expect_is(data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = b), "tbl_df")
-  expect_identical(
+  expect_equal(
     data_eval(a = 1:5, b = 6:10),
     data_eval(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = b)
   )
@@ -17,7 +17,7 @@ test_that("data_eval accepts tidy eval input", {
 
   expect_is(wrapper(a = 1:5, b = 6:10), "tbl_df")
   expect_is(wrapper(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = b), "tbl_df")
-  expect_identical(
+  expect_equal(
     wrapper(a = 1:5, b = 6:10),
     wrapper(.data = tibble::tibble(a = 1:5, b = 6:10), a = a, b = b)
   )

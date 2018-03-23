@@ -14,6 +14,8 @@ Suggests:
 RoxygenNote: 6.0.1
 Imports: rlang,
     tibble,
-    dplyr
+    dplyr,
+    assertthat,
+    purrr
 URL: https://github.com/paleolimbot/tidystats
 BugReports: https://github.com/paleolimbot/tidystats/issues

@@ -21,10 +21,15 @@ data_eval <- function(.data = NULL, ..., .allow_null = FALSE) {
     stop("NULL values in data_eval: ", paste0("'", missing_names, "'", collapse = ", "))
   }
   args <- args[!is_null]
+  arg_names <- purrr::map_chr(args, rlang::quo_text)
 
   if(is.null(.data)) {
-    tibble::tibble(!!!args)
+    data <- tibble::tibble(!!!args)
   } else {
-    tibble::as_tibble(dplyr::transmute(.data, !!!args))
+    data <- tibble::as_tibble(dplyr::transmute(.data, !!!args))
   }
+
+  attr(data, "tidy_data_names") <- arg_names
+
+  data
 }
