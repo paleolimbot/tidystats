@@ -3,6 +3,7 @@
 #'
 #' @param .data data.frame or tibble from which to source variables.
 #' @param values A vector of data values
+#' @param values_x,values_y Paired vectors of data values for the paired t-test.
 #' @param groups A vector with exactly two unique values for a two-sample
 #'   t-test, or NULL for a one-sample t-test
 #' @param alternative a character string specifying the alternative hypothesis,
@@ -84,6 +85,48 @@ tidy_t_test <- function(
 
     class(test) <- c("tidy_one_sample_t_test", "tidy_t_test", class(test))
   }
+
+  test
+}
+
+#' @rdname tidy_t_test
+#' @export
+tidy_t_test_paired <- function(
+  .data = NULL,
+  values_x, values_y,
+  alternative = c("two.sided", "less", "greater"),
+  mu = 0,
+  var_equal = FALSE,
+  conf_level = 0.95
+) {
+  alternative <- match.arg(alternative)
+  assert_that(
+    is.numeric(mu),
+    is.logical(var_equal),
+    is.numeric(conf_level),
+    conf_level < 1,
+    conf_level > 0
+  )
+
+  data <- data_eval(.data, values_x = !!enquo(values_x), values_y = !!enquo(values_y),
+                    .allow_null = FALSE)
+  data_names <- attr(data, "tidy_data_names")
+  assert_that(is.numeric(data$values_x), is.numeric(data$values_y))
+
+  test <- stats::t.test(
+    x = data$values_x,
+    y = data$values_y,
+    paired = TRUE,
+    var.equal = FALSE,
+    conf.level = conf_level,
+    alternative = alternative,
+    mu = mu,
+    na.action = stats::na.fail
+  )
+  test$data.name <- sprintf("%s and %s", data_names[1], data_names[2])
+  names(test$estimate) <- "mean of the differences"
+
+  class(test) <- c("tidy_paired_t_test", "tidy_t_test", class(test))
 
   test
 }

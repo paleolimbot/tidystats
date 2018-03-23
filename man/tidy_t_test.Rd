@@ -2,9 +2,14 @@
 % Please edit documentation in R/t_test.R
 \name{tidy_t_test}
 \alias{tidy_t_test}
+\alias{tidy_t_test_paired}
 \title{Tidy Student's t-test}
 \usage{
 tidy_t_test(.data = NULL, values, groups = NULL,
+  alternative = c("two.sided", "less", "greater"), mu = 0,
+  var_equal = FALSE, conf_level = 0.95)
+
+tidy_t_test_paired(.data = NULL, values_x, values_y,
   alternative = c("two.sided", "less", "greater"), mu = 0,
   var_equal = FALSE, conf_level = 0.95)
 }
@@ -29,6 +34,8 @@ estimate the variance otherwise the Welch (or Satterthwaite) approximation
 to the degrees of freedom is used.}
 
 \item{conf_level}{confidence level of the interval.}
+
+\item{values_x, values_y}{Paired vectors of data values for the paired t-test.}
 }
 \description{
 Tidy Student's t-test

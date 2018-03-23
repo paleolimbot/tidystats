@@ -2,6 +2,7 @@
 
 export(data_eval)
 export(tidy_t_test)
+export(tidy_t_test_paired)
 importFrom(assertthat,assert_that)
 importFrom(rlang,"!!!")
 importFrom(rlang,"!!")
