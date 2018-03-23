@@ -42,7 +42,7 @@ The (currently loose) philosphy of this package is to make statistics easier to 
 
 -   The output of a test function (like `tidy_t_test()`) should be an S3 classed list. The current approach is to return the same object that the **stats** equivalent would return with classes tacked on to the front, meaning it can be used like the **stats** class.
 
--   A `print()` method (preferably using pretty **cli** and **crayon** output) and a `plot()` method should be implemented for the test class.
+-   A `print()` method (preferably using pretty **cli** and **crayon** output), a `broom::tidy()` method (multi-row summary of the result), a `broom::glance()` method (one-row summary of fit quality), a `ggplot2::autoplot()` method should be implemented for the test class.
 
 -   If the concept of applying the model to a new dataset is relevant (predicting), `predict.s3_class_name()` should be implemented in the following way:
 
