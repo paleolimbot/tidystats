@@ -12,10 +12,13 @@ Suggests:
     testthat,
     covr
 RoxygenNote: 6.0.1
-Imports: rlang,
+Imports:
+    rlang,
     tibble,
     dplyr,
     assertthat,
-    purrr
+    purrr,
+    ggplot2,
+    withr
 URL: https://github.com/paleolimbot/tidystats
 BugReports: https://github.com/paleolimbot/tidystats/issues
